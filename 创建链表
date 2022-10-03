@@ -1,0 +1,49 @@
+
+#include<stdlib.h>
+#include<iostream>
+#include<string>
+using namespace std;
+struct node {
+	int data;
+	struct node* next;
+};
+
+node* creat() {
+	node*	L = new node;
+	if (!L) {
+		cout << "创建失败creat";
+		
+	}
+	L->next = NULL;
+	return L; 
+}
+//将输入依次插入到链表
+node* insert(int n,node* L) {
+	node* temp = new node;
+	if (!temp)cout << "创建失败";
+	temp->data = n;
+	temp->next = L->next;
+	L->next = temp;
+	return L;
+}
+void printList( node* L) {
+	node* head = L;
+	head = head->next;
+	while (head!=NULL) {
+		cout << head->data<<endl;
+		head = head->next;
+	}
+}
+int a=-1;//为了输入0的时候不再添加链表内容，学校实验要求 
+int main() {
+
+	node* L = creat();
+	while (a != 0) {
+		cin >> a;
+		if (a ==0) break;
+		insert(a, L);
+
+	}
+	printList(L); 
+	return 0;
+}
