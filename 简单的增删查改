@@ -1,0 +1,153 @@
+
+#include<stdlib.h>
+#include<iostream>
+#include<string>
+using namespace std;
+struct node {
+	int data;
+	struct node* next;
+};
+
+node* creat() {
+	node*	L = new node;
+	if (!L) {
+		cout << "创建失败creat";
+		
+	}
+	L->next = NULL;
+	return L; 
+}
+//将输入依次插入到链表
+node* insert(int n,node* L) {
+	node* temp = new node;
+	if (!temp)cout << "创建失败";
+	temp->data = n;
+	temp->next = L->next;
+	L->next = temp;
+	return L;
+}
+
+/*void comp(struct node* a, struct node* b) {
+	struct node* c ;
+	struct node*tail1,*tail2 ;
+	struct node* d;
+	d = a->next;
+	while(d) {//设置两个尾指针，让尾指针指到尾端
+		d = d->next;
+		tail1 = d;
+	}
+	d = b->next;
+	while (d) {
+		d = d->next;
+		tail2 = d;
+	}
+	if (tail1 > tail2) {
+
+	}
+}*/
+//定位插入
+void insertIndex(node* L,int n,int x) {
+	int i = 0;
+	struct node* p = L;
+	while (i!=n-1) {
+		p = p->next;
+		i++;
+	}
+	struct node* a = new node;
+	a->data = x;
+	a->next = p->next;
+	p->next = a;
+	
+}
+//删除节点数据
+void deleteIndex(struct node* L, int n) {
+	struct node* p = L;
+	int i = 0;
+	while (i != n - 1) {
+		p = p->next;
+		i++;
+	}
+	struct node* a = p->next;
+	p->next = p-> next->next;
+	delete a;
+}
+//查找
+void searchIndex(struct node* L, int n) {
+	int i = 0;
+	struct node* p = L;
+	while (1) {
+		
+		if (i != n && p) {
+			p = p->next;
+			i++;
+			if (i == n) {
+				cout << "该数字为:"<<endl<<p->data<<endl; break;
+			}
+		}
+		else
+		{
+			cout << "该数据不存在" << endl; break;
+		}
+	}
+	
+}
+int a=-1;
+//打印链表
+void printList( node* L) {
+	node* head = L;
+	head = head->next;
+	while (head!=NULL) {
+		cout << head->data<<endl;
+		head = head->next;
+	}
+}
+void menu() {
+	cout << "输入1在第i个元素之前插入一个值为x的元素" << endl;
+	cout << "输入2删除单链表中第i个元素" << endl;
+	cout << "输入3查找链表中相应的元素" << endl;
+	cout << "输入0退出系统" << endl;
+	
+}
+
+int main() {
+	int choice,n,x;
+	node* L = creat();
+	while (a != 0) {
+		cin >> a;
+		if (a ==0) break;
+		insert(a, L);
+
+	}
+	while (1) {
+		cout << "该课设的主人学号为：211040100421" << endl << "姓名为：徐赫良" << endl;
+		menu();
+		cout << "请输入相应的数字" << endl;
+		cin >> choice;
+		switch (choice) {
+		case 1:
+			cout << "分别输入n与x" << endl;
+			cin >> n >> x;
+			insertIndex(L, n, x);
+			cout << "插入后的链表为：" << endl;
+			printList(L); break;
+		case 2:
+			cout << "输入n" << endl;
+			cin >> n;
+			deleteIndex(L, n); 
+			cout << "删除后的链表为" << endl;
+			printList(L); break;
+		case 3:
+			cout << "输入n" << endl;
+			cin >> n;
+			searchIndex(L, n); break;
+		case 4:
+			exit(0);
+		default:cout << "输入的数字不对，请重新输入" << endl; break;
+		}
+		
+	}
+	return 0;
+}
+
+
+ 
