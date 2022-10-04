@@ -119,7 +119,7 @@ int main() {
 
 	}
 	while (1) {
-		cout << "该课设的主人学号为：211040100421" << endl << "姓名为：徐赫良" << endl;
+		
 		menu();
 		cout << "请输入相应的数字" << endl;
 		cin >> choice;
